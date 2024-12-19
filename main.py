@@ -29,42 +29,51 @@ class QueueSimulationApp:
         self.plot_frame.grid(row=0, column=2, rowspan=6,
                              padx=14, pady=14, sticky="nsew")
 
-        # Navigation buttons
-        self.next_button = ttk.Button(
-            self.root, text="Next Plot", command=self.show_next_plot)
-        self.next_button.grid(row=6, column=2, pady=10)
-        self.next_button.grid_remove()  # Hide until simulation is run
-        # right arrow
-        self.root.bind("<Right>", lambda event: self.show_next_plot())
+        # Navigation buttons in a horizontal row (next to each other)
+        self.button_frame = ttk.Frame(self.root)
+        self.button_frame.grid(row=6, column=2, pady=10, sticky="w")
 
         self.prev_button = ttk.Button(
-            self.root, text="Previous Plot", command=self.show_previous_plot)
-        self.prev_button.grid(row=7, column=2, pady=10)
+            self.button_frame, text="Previous Plot", command=self.show_previous_plot)
+        self.prev_button.grid(row=0, column=0, padx=5)
         self.prev_button.grid_remove()  # Hide until simulation is run
         # left arrow
         self.root.bind("<Left>", lambda event: self.show_previous_plot())
+
+        self.next_button = ttk.Button(
+            self.button_frame, text="Next Plot", command=self.show_next_plot)
+        self.next_button.grid(row=0, column=1, padx=5)
+        self.next_button.grid_remove()  # Hide until simulation is run
+        # right arrow
+        self.root.bind("<Right>", lambda event: self.show_next_plot())
 
         # Placeholder for plots
         self.figures = []
         self.current_plot_index = 0
 
-        # Results Text Box
-        self.results_text = tk.Text(self.root, height=20, width=90)
-        self.results_text.grid(row=8, column=0, columnspan=3, padx=10, pady=10)
+        # Results Text Box with a scrollbar
+        self.results_frame = ttk.Frame(self.root)
+        self.results_frame.grid(row=8, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
 
+        # Adjusted text box height to make sure it fits all content and moves it up a bit
+        self.results_text = tk.Text(self.results_frame, height=18, width=110)
+        self.results_text.grid(row=0, column=0, padx=5, pady=5, sticky="nsew")
+
+        self.scrollbar = ttk.Scrollbar(self.results_frame, orient="vertical", command=self.results_text.yview)
+        self.scrollbar.grid(row=0, column=1, sticky="ns")
+        
+        self.results_text.config(yscrollcommand=self.scrollbar.set)
+    
     def create_input_fields(self):
-        ttk.Label(self.root, text="Average number of arrivals (λ):").grid(
-            row=0, column=0, padx=5, pady=5, sticky="w")
+        ttk.Label(self.root, text="Average number of arrivals (λ):").grid(row=0, column=0, padx=5, pady=5, sticky="w")
         self.entry_l = ttk.Entry(self.root)
         self.entry_l.grid(row=0, column=1, padx=5, pady=5)
 
-        ttk.Label(self.root, text="Average number served per minute (µ):").grid(
-            row=1, column=0, padx=5, pady=5, sticky="w")
+        ttk.Label(self.root, text="Average number served per minute (µ):").grid(row=1, column=0, padx=5, pady=5, sticky="w")
         self.entry_mu = ttk.Entry(self.root)
         self.entry_mu.grid(row=1, column=1, padx=5, pady=5)
 
-        ttk.Label(self.root, text="Number of customers:").grid(
-            row=2, column=0, padx=5, pady=5, sticky="w")
+        ttk.Label(self.root, text="Number of customers:").grid(row=2, column=0, padx=5, pady=5, sticky="w")
         self.entry_number_of_customers = ttk.Entry(self.root)
         self.entry_number_of_customers.grid(row=2, column=1, padx=5, pady=5)
 
@@ -77,14 +86,12 @@ class QueueSimulationApp:
             row=4, column=0, columnspan=2, pady=10)
         self.root.bind(
             "<Return>", lambda event: self.run_simulation())  # Enter key
-        self.root.bind("r", lambda event: self.run_simulation()
-                       )         # 'r' key
+        self.root.bind("r", lambda event: self.run_simulation()) # 'r' key
 
         ttk.Button(self.root, text="Done", command=self.terminate_program).grid(
             row=5, column=0, columnspan=2, pady=10)
-        self.root.bind(
-            "<Escape>", lambda event: self.terminate_program())  # esc key
-        self.root.bind("d", lambda event: self.terminate_program())  # d key
+        self.root.bind("<Escape>", lambda event: self.terminate_program())  # esc key
+        self.root.bind("d", lambda event: self.terminate_program())          # d key
 
     def plot_utilization(self, utilization):
         # Create a figure for utilization
