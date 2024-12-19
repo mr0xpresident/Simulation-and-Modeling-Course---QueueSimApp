@@ -144,3 +144,112 @@ Input Parameters:
 
 ***Now you're ready to use QueueSimApp to simulate queue systems and analyze the results!***
 
+
+
+**5. Understanding the Output**
+
+
+_After running the simulation, the application provides two types of outputs: plots and the results TextBox._
+
+**- Plots:**
+  
+    The application generates visualizations to help analyze the queue system:
+
+    .Inter-arrival Time Distribution:
+    
+        This plot shows the time intervals between consecutive arrivals in the system, It follows an exponential distribution if arrivals are Poisson-distributed.
+    
+    .Service Time Distribution:
+    
+        Displays the time taken to serve each customer, The shape of this plot depends on the service rate (μ) and the distribution used.
+    
+    .Queue Length Over Time:
+    
+        This time-series plot shows how the number of customers in the queue evolves during the simulation, Peaks indicate periods of high congestion.
+    
+    .Customer Wait Time Distribution:
+    
+        A histogram of the waiting times for all customers, Helps to identify patterns or outliers in wait times.
+    
+    .Server Utilization:
+    
+        Visualizes how busy the servers were during the simulation, High utilization indicates efficiency but might suggest the need for more servers to prevent overloading.
+
+
+**- Results TextBox:**
+    
+The application provides a detailed summary of key statistics at the end of each simulation. These metrics are displayed as text output and help evaluate the performance of the queueing system.
+
+******Statistics Summary******
+
+    .Average Waiting Time:
+    
+         The average time a customer spends waiting in the queue before being served.
+    
+    .Probability of Customer Waiting:
+    
+        The proportion of customers who had to wait in the queue.
+    
+    .Average Service Time:
+    
+        The average time a server spends serving a customer.
+    
+    .Probability of Idle Server:
+    
+        The likelihood that a server was idle during the simulation.
+    
+    .Average Time Between Arrivals:
+    
+        The mean time interval between consecutive customer arrivals.
+    
+    . Average Waiting Time for Those Who Wait:
+    
+        The average wait time for customers who experienced a delay in the queue.
+    
+    .Average Time Customer Spends in the System:
+    
+        The total average time a customer spends in the system, including waiting and service time.
+    
+    .Expected Metrics
+        The results also include additional expected performance metrics for the queueing system:
+    
+    
+    .Time Between Arrivals:
+    
+        The observed mean time between customer arrivals.
+    
+    .Service Time (1/µ):
+    
+        The mean service time, based on the server's service rate.
+    
+    .Server Utilization (c):
+    
+    
+        The proportion of server capacity that was actively utilized.
+    
+    .Expected Waiting Time in Line (Wq):
+    
+    
+        The average waiting time customers spent in the queue.
+    
+    .Expected Time Spent in the System (Ws):
+    
+    
+         The total average time a customer spends in the system.
+    
+    .Expected Number of Customers in Line (Lq):
+    
+    
+        The average number of customers waiting in the queue.
+    
+    .Expected Number of Customers in the System (Ls):
+    
+    
+        The average number of customers present in the system at any time.
+    
+    . Expected Number of Occupied Servers:
+    
+    
+        The average number of servers actively serving customers.
+
+__**You can include these metrics to analyze the performance of the system under various conditions and identify bottlenecks or opportunities for optimization.**__
