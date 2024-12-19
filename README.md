@@ -21,30 +21,45 @@ Follow these steps to set up and run the application on your system:
 
 . Verify the installation by opening Command Prompt and running:
 
-      `python --version`
+```
+
+python --version
+
+```
 
 - On Linux
 
 . Use your package manager to install Python. For example:
 
-    ```
+```
     sudo apt update
     sudo apt install python3 python3-pip
-    ```
+```
 
 . Verify the installation:
 
-    `python3 --version`
+```
 
+python3 --version
+
+```
 - On macOS
 
 . Install Python using Homebrew or download it from the official Python website.
 
-    `brew install python`
+```
+
+   brew install python
+
+```
 
 . Verify the installation:
 
-    `python3 --version`
+```
+
+python3 --version
+
+```
 
 
 
@@ -59,7 +74,11 @@ Open your terminal or command prompt.
 Use the following command to install the required packages:
 
 
-      `pip install matplotlib seaborn pandas numpy tkinter`
+```
+
+   pip install matplotlib seaborn pandas numpy tkinter
+
+```
 
 
 Alternatively, create a requirements.txt file with the following content and use it for installation:
@@ -76,8 +95,11 @@ Alternatively, create a requirements.txt file with the following content and use
 
 Install all packages at once with:
 
-    `pip install -r requirements.txt`
+```   
 
+  pip install -r requirements.txt
+
+```
 
 
 **3. Run the Application**
@@ -86,7 +108,11 @@ Install all packages at once with:
  
  . Execute the file in your terminal:
  
-    `python queue_simulation_app.py`
+```
+
+python queue_simulation_app.py
+
+```
 
 
 ***The application window will appear, allowing you to input simulation parameters and view results.***
